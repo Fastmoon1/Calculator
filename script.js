@@ -46,7 +46,6 @@ function calculate() {
 
 function inputEquals() {
   if (operator === null) return;
-
   currentValue = calculate();
   operator = null;
   previousValue = "";
@@ -58,6 +57,11 @@ function clearAll() {
   operator = null;
 }
 
+function deleteLast() {
+  currentValue = currentValue.slice(0, -1);
+  if (currentValue === "") currentValue = "0";
+}
+
 function inputPercent() {
   currentValue = (parseFloat(currentValue) / 100).toString();
 }
@@ -67,6 +71,7 @@ keys.forEach((key) => {
     const value = key.dataset.value;
 
     if (!isNaN(value) || value === ".") {
+      // it's a digit (0-9) or a decimal point
       inputDigit(value);
     } else if (OPERATORS.includes(value)) {
       inputOperator(value);
@@ -74,6 +79,8 @@ keys.forEach((key) => {
       inputEquals();
     } else if (value === "clear") {
       clearAll();
+    } else if (value === "delete") {
+      deleteLast();
     } else if (value === "percent") {
       inputPercent();
     }

@@ -1,10 +1,9 @@
-
 const display = document.getElementById("display");
 const keys = document.querySelectorAll("button");
 
-let currentValue = "0";  
-let previousValue = ""; 
-let operator = null;        
+let currentValue = "0";
+let previousValue = "";
+let operator = null;
 
 const OPERATORS = ["+", "-", "*", "/"];
 
@@ -13,13 +12,14 @@ function updateDisplay() {
 }
 
 function inputDigit(digit) {
-  if (digit === "." && currentValue.includes(".")) return; 
+  if (digit === "." && currentValue.includes(".")) return;
+
   if (currentValue === "0" && digit !== ".") {
-    currentValue = digit;   
-    currentValue += digit;       
+    currentValue = digit;
+  } else {
+    currentValue += digit;
   }
 }
-
 
 function inputOperator(nextOperator) {
   if (operator && previousValue !== "") {
@@ -45,7 +45,7 @@ function calculate() {
 }
 
 function inputEquals() {
-  if (operator === null) return; 
+  if (operator === null) return;
 
   currentValue = calculate();
   operator = null;
